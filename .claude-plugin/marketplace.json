@@ -1,0 +1,13 @@
+{
+  "name": "qsc",
+  "owner": {
+    "name": "Qusai"
+  },
+  "plugins": [
+    {
+      "name": "qsc-kit",
+      "source": "./plugins/qsc-kit",
+      "description": "Reusable Claude Code skills and agents"
+    }
+  ]
+}
