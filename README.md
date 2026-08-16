@@ -15,6 +15,7 @@ Reusable Claude Code skills and agents.
 | `plan-and-ship` | Skill | Three human-gated phases on three models — plan on Opus, implement on Sonnet, ship via `commit-push` on Haiku. Triggers whenever you ask for a plan or an approach to a change. |
 | `web-performance-optimization` | Skill | Code splitting, lazy loading, caching, compression, and Core Web Vitals monitoring. Use for slow loads, large bundles, or layout shift. |
 | `commit-push` | Agent | Commits and pushes **only** the files it is explicitly given, using a conventional commit message. Runs on Haiku. Refuses to run without a file list (or the literal word `ALL`). |
+| `figma-implement-design` | Agent | Translates a Figma design (URL or desktop selection) into production-ready code with 1:1 visual fidelity, using the Figma MCP server. Runs on Sonnet. Requires the `figma` plugin. |
 
 ## Install
 
@@ -47,6 +48,12 @@ Then `/plugin` to browse, enable, disable, or update what's installed.
 
   It never expands that list. Pass `ALL` only when you really want the whole working tree.
 
+  `@figma-implement-design` works the same way — give it a Figma URL and it implements the matching code:
+
+  ```
+  @figma-implement-design https://figma.com/design/kL9xQn2VwM8pYrTb4ZcHjF/DesignSystem?node-id=42-15
+  ```
+
 ## Repository layout
 
 ```
@@ -58,6 +65,7 @@ plugins/
       plugin.json           # plugin manifest — name, description, version
     agents/
       commit-push.md
+      figma-implement-design.md
     skills/
       plan-and-ship/
         SKILL.md
