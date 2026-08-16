@@ -4,7 +4,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace with reusable
 
 ## What's in here
 
-A marketplace named `qsc` that serves two plugins:
+A marketplace named `qsc` that serves one plugin:
 
 ### `qsc-kit`
 
@@ -46,14 +46,6 @@ Then `/plugin` to browse, enable, disable, or update what's installed.
   ```
 
   It never expands that list. Pass `ALL` only when you really want the whole working tree.
-
-### `figma`
-
-Figma design platform integration (re-listed from the official `claude-plugins-official` marketplace, pinned to a fixed commit). Install with:
-
-```
-/plugin install figma@qsc
-```
 
 ## Repository layout
 
