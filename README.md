@@ -12,7 +12,6 @@ Reusable Claude Code skills and agents. Click a name for how to use it in a proj
 
 | Component | Type | What it does |
 |---|---|---|
-| [`plan-and-ship`](#plan-and-ship) | Skill | Three human-gated phases on three models — plan on Opus, implement on Sonnet, ship via `commit-push` on Haiku. Triggers whenever you ask for a plan or an approach to a change. |
 | [`web-performance-optimization`](#web-performance-optimization) | Skill | Code splitting, lazy loading, caching, compression, and Core Web Vitals monitoring. Use for slow loads, large bundles, or layout shift. |
 | [`fluid-tokens`](#fluid-tokens) | Skill | Fluid responsive design tokens — turns a `[mobile, desktop]` px pair into a Tailwind class that scales smoothly between 430px and 1920px, with breakpoint and RTL overrides. Installs the generator pipeline itself if the project doesn't have one. |
 | [`commit-push`](#commit-push) | Agent | Commits and pushes **only** the files it is explicitly given, using a conventional commit message. Runs on Haiku. Refuses to run without a file list (or the literal word `ALL`). |
@@ -45,34 +44,6 @@ Then `/plugin` to browse, enable, disable, or update what's installed.
 ---
 
 # Skills
-
-## `plan-and-ship`
-
-Splits a change into three phases on three models, with a human gate between each: **plan on Opus** (research and a written plan, zero file edits), **implement on Sonnet** (a subagent applies the approved plan), **ship on Haiku** (via the `commit-push` agent). Phases never collapse into one another, and you can stop after any of them.
-
-**Triggers on** "write a plan", "plan out X", "how should we approach", "what's the best way to add/refactor/restructure", "scope this out" — with or without the word "plan".
-
-**Does not trigger** for questions answerable by reading code ("where is X", "why does Y happen"), for a single obvious edit you already described precisely, or when a more specific skill owns the task.
-
-### Using it
-
-Just describe the change:
-
-```
-How should we approach moving the footer legal copy into data files?
-```
-
-You'll get a plan with **Goal**, **Files** (as clickable `path:line`), **Steps**, **Conventions in play**, and **Risks** — then a gate. Approve it and Sonnet implements; review the diff; say ship and `commit-push` commits the exact file list Sonnet reported.
-
-If your session isn't already on Opus, the skill spawns an Opus planner rather than planning on a smaller model, then pastes the plan back verbatim.
-
-### Project fit
-
-The skill is written for a repo where conventions are already settled — it tells each phase to find the existing precedent and match it rather than invent one. Its **Operating standard** section (name things exactly, verify don't assume, match surrounding code) is restated into every subagent prompt, since subagents start cold and can't see the skill.
-
-It also carries a repo-specific warning that the installed Next.js version differs from training data and that `node_modules/next/dist/docs/` is the source of truth. Adjust or drop that section for projects where it doesn't apply.
-
----
 
 ## `web-performance-optimization`
 
@@ -225,8 +196,6 @@ plugins/
       commit-push.md
       figma-implement-design.md
     skills/
-      plan-and-ship/
-        SKILL.md
       web-performance-optimization/
         SKILL.md
         references/         # loaded on demand, not up front
